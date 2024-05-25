@@ -87,4 +87,4 @@ Type something again ==> Żółć
 
 As we can see, in the first case, multi-byte characters (as in `Żółć`) are not read correctly. This is because (at least under Linux) the text from the console is in UTF-8 encoding, in which a single character may occupy 1, 2, 3, or even 4 bytes. The stream `System.in` is, however, a byte (binary) stream, so each read consumes one byte, which does not necessarily correspond to any character, as it may be only a part of a multi-byte character.
 
-The situation is different in the second case — here we wrap `System.in` in `InputStreamReader` (which behaves as a text stream), passing also the correct encoding. The object of this wrapper (decorator) class behaves as a text stream, so each read consumes one character, no matter how many bytes it takes.
+The situation is different in the second case — here we wrap `System.in` in `InputStreamReader` (which behaves as a text stream), passing also the correct encoding. The object of this wrapper (_decorator_) class behaves as a _text_ stream, so each `read` consumes one _character_, no matter how many bytes it takes.
