@@ -2,7 +2,7 @@
 
 Page 118
 
-Cont. from 75
+Cont. from [75.KEP-WriteBin](https://github.com/Java-PJATK/75.KEP-WriteBin)
 
 In the next example, we first read from an `InputStream` (connected just to `System.in`). Since this is a binary stream, invoking `read` returns consecutive bytes as integers, which we can cast to `char`. When the end of data is reached, `read` returns `-1` (note that `-1` does not correspond to any legal character). However, this will never happen with `System.in`, so we detect the LF character (`'\n'`) to stop reading.
 
