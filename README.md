@@ -64,3 +64,27 @@ public class BytesChars {
 }
 
 ```
+
+Running the program, we can get:
+
+```
+Type something and press enter ==> Żółć
+197 ('Å') => digit:false letter:true white:false
+187 ('»') => digit:false letter:false white:false
+195 ('Ã') => digit:false letter:true white:false
+179 ('³') => digit:false letter:false white:false
+197 ('Å') => digit:false letter:true white:false
+130 ('') => digit:false letter:false white:false
+196 ('Ä') => digit:false letter:true white:false
+135 ('') => digit:false letter:false white:false
+
+Type something again ==> Żółć
+0x17b ('Ż') => digit:false letter:true white:false
+0xf3 ('ó') => digit:false letter:true white:false
+0x142 ('ł') => digit:false letter:true white:false
+0x107 ('ć') => digit:false letter:true white:false
+```
+
+As we can see, in the first case, multi-byte characters (as in `Żółć`) are not read correctly. This is because (at least under Linux) the text from the console is in UTF-8 encoding, in which a single character may occupy 1, 2, 3, or even 4 bytes. The stream `System.in` is, however, a byte (binary) stream, so each read consumes one byte, which does not necessarily correspond to any character, as it may be only a part of a multi-byte character.
+
+The situation is different in the second case — here we wrap `System.in` in `InputStreamReader` (which behaves as a text stream), passing also the correct encoding. The object of this wrapper (decorator) class behaves as a text stream, so each read consumes one character, no matter how many bytes it takes.
